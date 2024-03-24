@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose a Door Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .door {
+      display: inline-block;
+      width: 100px;
+      height: 150px;
+      margin: 20px;
+      border: 2px solid black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose a Door</h1>
+  <div class="doors">
+    <div class="door" onclick="openDoor(1)" id="door1">Door 1</div>
+    <div class="door" onclick="openDoor(2)" id="door2">Door 2</div>
+    <div class="door" onclick="openDoor(3)" id="door3">Door 3</div>
+    <div class="door" onclick="openDoor(4)" id="door4">Door 4</div>
+  </div>
+  <p id="result"></p>
+
+  <script>
+    var numbers = [1, 2, 3, 4];
+    shuffle(numbers);
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function openDoor(doorNumber) {
+      var result = document.getElementById("result");
+      var door = document.getElementById("door" + doorNumber);
+
+      if (door.classList.contains("opened")) {
+        result.textContent = "This door has already been opened.";
+        return;
+      }
+
+      result.textContent = "You got: " + numbers[doorNumber - 1];
+      door.classList.add("opened");
+
+      // Disable click event for this door
+      door.onclick = null;
+    }
+  </script>
+</body>
+</html>
