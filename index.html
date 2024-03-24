@@ -52,8 +52,11 @@
       result.textContent = "You got: " + numbers[doorNumber - 1];
       door.classList.add("opened");
 
-      // Disable click event for this door
-      door.onclick = null;
+      // Disable click event for all other doors
+      var doors = document.querySelectorAll('.door');
+      doors.forEach(function(door) {
+        door.onclick = null;
+      });
     }
   </script>
 </body>
